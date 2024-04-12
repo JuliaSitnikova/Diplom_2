@@ -14,11 +14,11 @@ class TestUpdateUser:
                               "password",
                               "name"]
                              )
-    @allure.title('Проверка изменений данных пользователя с авторизацей')
+    @allure.title('Проверка изменений данных пользователя с авторизацией')
     def test_patch_authorized(self, create_user_payload, make_user, key_to_be_changed):
         payload = create_user_payload(email='rand', password='1234', name='rand')
         user = make_user(data=payload)
-        print(user)
+
         RequestsUser().post_login_user(data=payload, token=user["text"]['accessToken'])
         payload[key_to_be_changed] = fake.name()
         RequestsUser().patch_user(data=payload, token=user["text"]['accessToken'])
